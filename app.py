@@ -15,9 +15,9 @@ def driver():
     #Create a database connection
     db_connection = DBConnection().db_connect(database_name)
     #Create an sftp connection with the remote server
-    # sftp_connection = SftpConnection().sftp_connect(my_hostname, my_username, my_password)
+    sftp_connection = SftpConnection().sftp_connect(my_hostname, my_username, my_password)
     #Download the files from sftp server
-    # download_csv(sftp_connection)
+    download_csv(sftp_connection)
     #We iterate over the files that have been downloaded and make the database operations
     for file in os.listdir(r"data/"):
         if file.endswith(".csv"):
@@ -26,7 +26,7 @@ def driver():
             insert_to_db(file_contents, c) #Inserts parsed data to database
             lookup_db(c) #Lookup the table from database
     db_connection.close()
-    # sftp_connection.close()
+    sftp_connection.close()
     print('Database disconnected')
     print('Sftp Server disconnected')
 
